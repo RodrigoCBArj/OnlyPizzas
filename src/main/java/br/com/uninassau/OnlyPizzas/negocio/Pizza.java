@@ -17,14 +17,4 @@ public class Pizza extends Produto {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "sequencia_pizza")
     private int codigo;
     private String tamanho;
-//    private boolean compoeItem;
-
-//    @Override
-//    public String toString() {
-//        if (compoeItem) {
-//            return this.getNome() + " " + this.tamanho;
-//        }
-//
-//        return super.toString();
-//    }
 }

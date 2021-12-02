@@ -2,71 +2,70 @@ package br.com.uninassau.OnlyPizzas.dados;
 
 import br.com.uninassau.OnlyPizzas.negocio.Pizza;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/pizzas")
 public class ControladorPizza {
 
-    @Qualifier("repositorioPizza")
     @Autowired
-    private RepositorioPizza RepProduto;
+    private RepositorioPizza repositorioPizza;
 
-    @PostMapping("/pizza/inserir")
-    public Pizza inserir (@RequestBody Pizza pizza) {
-        return this.RepProduto.save(pizza);
-    }
-
-    @GetMapping("/pizza/listar")
+    @GetMapping    // Lista todas as pizzas
     public List<Pizza> listar() {
-        return this.RepProduto.findAll();
+        return this.repositorioPizza.findAll();
     }
 
-    @GetMapping("/pizza/consultar/{codigo}")
+    @PostMapping("/inserir")   // Adiciona uma nova pizza ao banco de dados. É necessário informar o nome, descrição, valor e tamanho
+    public Pizza inserir (@RequestBody Pizza pizza) {
+        return this.repositorioPizza.save(pizza);
+    }
+
+    @GetMapping("/consultar/{codigo}")    // Mostra a pizza referente ao código informado, caso exista
     public Object consultar(@PathVariable("codigo") int codigo) {
 
-        if (this.RepProduto.existsById(codigo)) {
-            return this.RepProduto.findById(codigo);
+        if (this.repositorioPizza.existsById(codigo)) {
+            return this.repositorioPizza.findById(codigo);
         } else {
             return "Pizza não encontrada!";
         }
     }
 
-    @PutMapping("/pizza/atualizar/{opcao}/{codigo}")
+    @PutMapping("/atualizar/{opcao}/{codigo}")    // Atualiza o campo que você deseja, da pizza informada via código
     public Object atualizar(@PathVariable("opcao") int opcao, @PathVariable("codigo") int codigo, @RequestBody Pizza atualizarPizza) {
         Pizza pizzaFinal;
 
-        if (this.RepProduto.existsById(codigo)) {
+        if (this.repositorioPizza.existsById(codigo)) {
             if (opcao == 1) {   // 1 - Nome
-                pizzaFinal = this.RepProduto.getById(codigo);
+                pizzaFinal = this.repositorioPizza.getById(codigo);
                 pizzaFinal.setNome(atualizarPizza.getNome());
             } else if (opcao == 2) {    // 2 - Descrição
-                pizzaFinal = this.RepProduto.getById(codigo);
+                pizzaFinal = this.repositorioPizza.getById(codigo);
                 pizzaFinal.setDescricao(atualizarPizza.getDescricao());
             } else if (opcao == 3){    // 3 - Valor
-                pizzaFinal = this.RepProduto.getById(codigo);
+                pizzaFinal = this.repositorioPizza.getById(codigo);
                 pizzaFinal.setValor(atualizarPizza.getValor());
             } else if (opcao == 4) {    // Tamanho
-                pizzaFinal = this.RepProduto.getById(codigo);
+                pizzaFinal = this.repositorioPizza.getById(codigo);
                 pizzaFinal.setTamanho(atualizarPizza.getTamanho());
             } else {
                 return  "Opção inválida!\n" +
                         "Informe da seguinte forma: /pizza/atualizar/{1 ou 2 ou 3 ou 4}/{codigo da pizza}\n" +
-                        "Sendo: 1 = nome; 2 = descrição; 3= valor; 4 = tamanho.";
+                        "Sendo: 1 = nome; 2 = descrição; 3 = valor; 4 = tamanho.";
             }
-            return this.RepProduto.save(pizzaFinal);
+            return this.repositorioPizza.save(pizzaFinal);
         } else {
             return "Pizza inexistente!";
         }
     }
 
-    @DeleteMapping("/pizza/remover/{codigo}")
+    @DeleteMapping("/remover/{codigo}")   // Deleta uma pizza pelo código, caso exista
     public String remover(@PathVariable("codigo") int codigo) {
 
-        if (this.RepProduto.existsById(codigo)) {
-            this.RepProduto.deleteById(codigo);
+        if (this.repositorioPizza.existsById(codigo)) {
+            this.repositorioPizza.deleteById(codigo);
             return "Pizza removida com sucesso!";
         } else {
             return "Pizza não encontrada.";

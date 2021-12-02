@@ -16,10 +16,4 @@ public abstract class Produto {
     private String descricao;
     private double valor;
     private String data_cadastro = Data.pegarDataAtual();
-
-//    @Override
-//    public String toString() {
-//        return "\nCódigo: " + this.codigo + "\nNome: " + this.nome + "\nDescrição: " + this.descricao +
-//                "\nValor: R$" + this.valor + "\nData de Cadastro: " + this.dataCadastro;
-//    }
 }

@@ -2,71 +2,70 @@ package br.com.uninassau.OnlyPizzas.dados;
 
 import br.com.uninassau.OnlyPizzas.negocio.Bebida;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/bebidas")
 public class ControladorBebida {
 
-    @Qualifier("repositorioBebida")
     @Autowired
-    private RepositorioBebida RepProduto;
+    private RepositorioBebida repositorioBebida;
 
-    @PostMapping("/bebida/inserir")
-    public Bebida inserir (@RequestBody Bebida bebida) {
-        return this.RepProduto.save(bebida);
-    }
-
-    @GetMapping("/bebida/listar")
+    @GetMapping   // Lista todas as bebidas
     public List<Bebida> listar() {
-        return this.RepProduto.findAll();
+        return this.repositorioBebida.findAll();
     }
 
-    @GetMapping("/bebida/consultar/{codigo}")
+    @PostMapping("/inserir")   // Adiciona uma nova bebida ao banco de dados. É necessário informar o nome, descrição, valor e volume
+    public Bebida inserir (@RequestBody Bebida bebida) {
+        return this.repositorioBebida.save(bebida);
+    }
+
+    @GetMapping("/consultar/{codigo}")    // Mostra a bebida referente ao código informado, caso exista
     public Object consultar(@PathVariable("codigo") int codigo) {
 
-        if (this.RepProduto.existsById(codigo)) {
-            return this.RepProduto.findById(codigo);
+        if (this.repositorioBebida.existsById(codigo)) {
+            return this.repositorioBebida.findById(codigo);
         } else {
             return "Bebida não encontrada!";
         }
     }
 
-    @PutMapping("/bebida/atualizar/{opcao}/{codigo}")
+    @PutMapping("/atualizar/{opcao}/{codigo}")    // Atualiza o campo que você deseja, da bebida informada via código
     public Object atualizar(@PathVariable("codigo") int codigo,@RequestBody Bebida atualizarBebida, @PathVariable("opcao") int opcao) {
         Bebida bebidaFinal;
 
-        if (this.RepProduto.existsById(codigo)) {
+        if (this.repositorioBebida.existsById(codigo)) {
             if (opcao == 1) {   // 1 - Nome
-                bebidaFinal = this.RepProduto.getById(codigo);
+                bebidaFinal = this.repositorioBebida.getById(codigo);
                 bebidaFinal.setNome(atualizarBebida.getNome());
             } else if (opcao == 2) {    // 2 - Descrição
-                bebidaFinal = this.RepProduto.getById(codigo);
+                bebidaFinal = this.repositorioBebida.getById(codigo);
                 bebidaFinal.setDescricao(atualizarBebida.getDescricao());
             } else if (opcao == 3){    // 3 - Valor
-                bebidaFinal = this.RepProduto.getById(codigo);
+                bebidaFinal = this.repositorioBebida.getById(codigo);
                 bebidaFinal.setValor(atualizarBebida.getValor());
             } else if (opcao == 4) {    // 4 - Volume
-                bebidaFinal = this.RepProduto.getById(codigo);
+                bebidaFinal = this.repositorioBebida.getById(codigo);
                 bebidaFinal.setVolume(atualizarBebida.getVolume());
             } else {
                 return  "Opção inválida!\n" +
                         "Informe da seguinte forma: /bebida/atualizar/{1 ou 2 ou 3 ou 4}/{codigo da bebida}\n" +
-                        "Sendo: 1 = nome; 2 = descrição; 3= valor; 4 = volume.";
+                        "Sendo: 1 = nome; 2 = descrição; 3 = valor; 4 = volume.";
             }
-            return this.RepProduto.save(bebidaFinal);
+            return this.repositorioBebida.save(bebidaFinal);
         } else {
             return "Bebida inexistente!";
         }
     }
 
-    @DeleteMapping("/bebida/remover/{codigo}")
+    @DeleteMapping("/remover/{codigo}")   // Deleta uma bebida pelo código, caso exista
     public String remover(@PathVariable("codigo") int codigo) {
 
-        if (this.RepProduto.existsById(codigo)) {
-            this.RepProduto.deleteById(codigo);
+        if (this.repositorioBebida.existsById(codigo)) {
+            this.repositorioBebida.deleteById(codigo);
             return "Bebida removida com sucesso!";
         } else {
             return "Bebida não encontrada.";
