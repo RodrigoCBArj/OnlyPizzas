@@ -27,7 +27,7 @@ public class ControladorPizza {
     public Object consultar(@PathVariable("codigo") int codigo) {
 
         if (this.repositorioPizza.existsById(codigo)) {
-            return this.repositorioPizza.findById(codigo);
+            return this.repositorioPizza.findById(codigo).get();
         } else {
             return "Pizza não encontrada!";
         }

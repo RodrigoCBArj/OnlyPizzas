@@ -27,7 +27,7 @@ public class ControladorBebida {
     public Object consultar(@PathVariable("codigo") int codigo) {
 
         if (this.repositorioBebida.existsById(codigo)) {
-            return this.repositorioBebida.findById(codigo);
+            return this.repositorioBebida.findById(codigo).get();
         } else {
             return "Bebida não encontrada!";
         }
