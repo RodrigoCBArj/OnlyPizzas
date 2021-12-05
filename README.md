@@ -4,6 +4,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/status-developing-orange?style=for-the-badge"/>
+  <img src="https://img.shields.io/github/license/RodrigoCBArj/OnlyPizzas?style=for-the-badge"/>
 </p>
 <h4>:page_with_curl: Descrição</h4>
 Evolução do projeto Java puro nascido na faculdade. Esse projeto tem objetivo apenas de estudo acadêmico.
@@ -12,7 +13,9 @@ Essa aplicação tem objetivo de atender um estabelecimento do tipo Pizzaria, co
 
 Projeto inicial: https://github.com/RodrigoCBArj/ProjetoPizzaria
 
-<h4>:wrench: Principais Stacks e ferramentas utilizadas</h4>
+#
+
+<h4>:wrench: Principais Stacks e Ferramentas utilizadas</h4>
 
 - ``Java 11``
 - ``Spring``
@@ -20,3 +23,15 @@ Projeto inicial: https://github.com/RodrigoCBArj/ProjetoPizzaria
 - ``JPA``
 - ``MySQL``
 - ``Postgres``
+
+#
+
+<h4>:orange_heart: Agradecimento</h4>
+
+Agradecimento especial à nossa excelente professora Juliana Mafra por nos ensinar e mentorar, sempre visando nosso crescimento profissional com foco no mercado.
+
+#
+
+<h4>:heavy_check_mark: Licença </h4>
+
+OnlyPizzas possui [licença MIT](./LICENSE).
