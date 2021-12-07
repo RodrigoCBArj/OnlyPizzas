@@ -4,6 +4,8 @@
 //import lombok.NoArgsConstructor;
 //import lombok.Setter;
 //
+//import javax.persistence.OneToOne;
+//
 //@Getter
 //@Setter
 //@NoArgsConstructor
@@ -19,7 +21,7 @@
 //        this.valor = Total(quantidade, valor);
 //    }
 //
-//    private double Total (int quantidade, double valor) {
+//    private static double Total (int quantidade, double valor) {
 //        return quantidade * valor;
 //    }
 //}

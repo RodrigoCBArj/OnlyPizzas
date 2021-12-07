@@ -33,42 +33,39 @@ public class ControladorCliente {
         }
     }
 
-//    @PutMapping("/atualizar/{opcao}/{codigo}")    // Atualiza o campo que você deseja, da cliente informada via código
-//    public Object atualizar(@PathVariable("opcao") int opcao, @PathVariable("codigo") int codigo, @RequestBody Cliente atualizarCliente) {
-//        Cliente clienteFinal;
-//
-//        if (this.repositorioCliente.existsById(codigo)) {
-//            if (opcao == 1) {   // 1 - Nome
-//                clienteFinal = this.repositorioCliente.getById(codigo);
-//                clienteFinal.setNome(atualizarCliente.getNome());
-//            } else if (opcao == 2) {    // 2 - Descrição
-//                clienteFinal = this.repositorioCliente.getById(codigo);
-//                clienteFinal.setDescricao(atualizarCliente.getDescricao());
-//            } else if (opcao == 3){    // 3 - Valor
-//                clienteFinal = this.repositorioCliente.getById(codigo);
-//                clienteFinal.setValor(atualizarCliente.getValor());
-//            } else if (opcao == 4) {    // Tamanho
-//                clienteFinal = this.repositorioCliente.getById(codigo);
-//                clienteFinal.setTamanho(atualizarCliente.getTamanho());
-//            } else {
-//                return  "Opção inválida!\n" +
-//                        "Informe da seguinte forma: /cliente/atualizar/{1 ou 2 ou 3 ou 4}/{codigo da cliente}\n" +
-//                        "Sendo: 1 = nome; 2 = descrição; 3 = valor; 4 = tamanho.";
-//            }
-//            return this.repositorioCliente.save(clienteFinal);
-//        } else {
-//            return "Cliente inexistente!";
-//        }
-//    }
+    @PutMapping("/atualizar/{opcao}/{codigo}")    // Atualiza o campo que você deseja, da cliente informada via código
+    public Object atualizar(@PathVariable("opcao") int opcao, @PathVariable("codigo") int codigo, @RequestBody Cliente atualizarCliente) {
+        Cliente clienteFinal;
+
+        if (this.repositorioCliente.existsById(codigo)) {
+            clienteFinal = this.repositorioCliente.getById(codigo);
+            if (opcao == 1) {   // 1 - Nome
+                clienteFinal.setNome(atualizarCliente.getNome());
+            } /*else if (opcao == 2) {    // 2 - Endereco
+                clienteFinal.setEndereco(atualizarCliente.getEndereco());
+            } */else if (opcao == 3){    // 3 - Telefone
+                clienteFinal.setTelefone(atualizarCliente.getTelefone());
+            } else if (opcao == 4) {    // 4 - Data_nascimento
+                clienteFinal.setData_nascimento(atualizarCliente.getData_nascimento());
+            } else {
+                return  "Opção inválida!\n" +
+                        "Informe da seguinte forma: /cliente/atualizar/{1 ou 2 ou 3 ou 4}/{codigo da cliente}\n" +
+                        "Sendo: 1 = nome; 2 = Endereco; 3 = Telefone; 4 = Data_nascimento.";
+            }
+            return this.repositorioCliente.save(clienteFinal);
+        } else {
+            return "Cliente inexistente!";
+        }
+    }
 
     @DeleteMapping("/remover/{codigo}")   // Deleta uma cliente pelo código, caso exista
     public String remover(@PathVariable("codigo") int codigo) {
 
         if (this.repositorioCliente.existsById(codigo)) {
             this.repositorioCliente.deleteById(codigo);
-            return "Cliente removida com sucesso!";
+            return "Cliente removido com sucesso!";
         } else {
-            return "Cliente não encontrada.";
+            return "Cliente não encontrado.";
         }
     }
 }

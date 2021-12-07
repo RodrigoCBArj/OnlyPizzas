@@ -13,7 +13,6 @@ import javax.persistence.MappedSuperclass;
 public abstract class Pessoa {
 
     private String nome;
-//    private Endereco endereco;
     private String telefone;
     private String data_nascimento;
     private String data_cadastro = Data.pegarDataAtual();

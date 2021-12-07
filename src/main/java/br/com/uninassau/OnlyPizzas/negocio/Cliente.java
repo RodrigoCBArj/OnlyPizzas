@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "clientes")
 public class Cliente extends Pessoa {
@@ -17,7 +18,10 @@ public class Cliente extends Pessoa {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "sequencia_clientes")
     private int codigo;
 
-    @OneToMany(mappedBy = "cliente")
-    @JoinColumn(name = "pedidos_codigo")
-    private Pedido pedidos;
+//    @OneToMany(mappedBy = "cliente")
+//    private List<Pedido> pedidos;
+
+//    @OneToOne(mappedBy = "cliente")
+//    @JoinColumn(name = "endereco_codigo", referencedColumnName = "codigo")
+//    private Endereco endereco;
 }
