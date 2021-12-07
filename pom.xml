@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>br.com.uninassau</groupId>
 	<artifactId>OnlyPizzas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2</version>
 	<name>Only Pizzas</name>
 	<description>Projeto de programação web em Spring Boot</description>
 	<properties>
@@ -59,6 +59,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
 				<configuration>
 					<excludes>
 						<exclude>
